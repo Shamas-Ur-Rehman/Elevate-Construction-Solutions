@@ -100,9 +100,9 @@ const Form = () => {
         uploadId: uploadIdUrl,
       };
 
-      const SERVICE_ID = "service_tj8ac6h";
-      const TEMPLATE_ID = "template_5bqbq15";
-      const USER_ID = "GSRmOqymJi-5RvZgZ";
+      const SERVICE_ID = "service_n2ccxbe";
+      const TEMPLATE_ID = "template_b528go5";
+      const USER_ID = "aMqk1X8FmbYwGQNnt";
 
       const response = await emailjs.send(SERVICE_ID, TEMPLATE_ID, emailData, USER_ID);
 
