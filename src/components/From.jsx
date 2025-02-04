@@ -264,7 +264,7 @@ const Form = () => {
             transition={{ delay: 2.2, duration: 0.5 }}
           >
             <label htmlFor="headshotImage" className="block text-sm font-medium text-gray-700">
-              Picture of self holding ID <Span className="text-red-800">*</Span>
+              Picture of Self Holding ID <span className="text-red-800">*</span>
             </label>
             <input
               id="headshotImage"
