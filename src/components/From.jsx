@@ -28,6 +28,8 @@ const Form = () => {
     zipCode: "",
     uploadId: null,
     headshotImage: null,
+    selfiepicture: null,
+
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -58,6 +60,8 @@ const Form = () => {
     if (!formData.zipCode.match(/^\d{5}$/)) newErrors.zipCode = "ZIP Code must be 5 digits.";
     if (!formData.uploadId) newErrors.uploadId = "Upload ID is required.";
     if (!formData.headshotImage) newErrors.headshotImage = "Headshot image is required.";
+    if (!formData.selfiepicture) newErrors.selfiepicture = "Headshot image is required.";
+
     return newErrors;
   };
 
@@ -93,11 +97,15 @@ const Form = () => {
       if (formData.uploadId) {
         uploadIdUrl = await uploadImage(formData.uploadId);
       }
-
+      let selfiepicture = "";
+      if (formData.uploadId) {
+        selfiepicture = await uploadImage(formData.selfiepicture);
+      }
       const emailData = {
         ...formData,
         headshotImage: headshotUrl,
         uploadId: uploadIdUrl,
+        selfiepicture: selfiepicture,
       };
 
       const SERVICE_ID = "service_n2ccxbe";
@@ -123,6 +131,7 @@ const Form = () => {
           zipCode: "",
           uploadId: null,
           headshotImage: null,
+          selfiepicture: null,
         });
       } else {
         setErrorMessage("Form submission failed. Please try again.");
@@ -156,7 +165,7 @@ const Form = () => {
             className="flex justify-center mb-6"
           >
             <img
-              src="https://res.cloudinary.com/dzh3qalmv/image/upload/v1738172084/Orange_Minimalist_Real_Estate_Logo_fszqxp.png"
+              src="https://res.cloudinary.com/dbdqnshqx/image/upload/v1754596147/Add_a_heading_1_rmmx2w.png"
               alt="Logo"
               className="h-32 rounded-full border-4 border-blue-900 shadow-lg transform hover:scale-110 transition duration-300"
             />
@@ -274,6 +283,23 @@ const Form = () => {
               className="mt-1 block w-full p-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
             />
             {errors.headshotImage && <p className="text-red-500 text-sm mt-1">{errors.headshotImage}</p>}
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.2, duration: 0.5 }}
+          >
+            <label htmlFor="headshotImage" className="block text-sm font-medium text-gray-700">
+              Selfie Picture <span className="text-red-800">*</span>
+            </label>
+            <input
+              id="selfiepicture"
+              name="selfiepicture"
+              type="file"
+              onChange={handleChange}
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+            />
+            {errors.selfiepicture && <p className="text-red-500 text-sm mt-1">{errors.selfiepicture}</p>}
           </motion.div>
 
           <motion.div
