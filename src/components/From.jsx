@@ -29,6 +29,7 @@ const Form = () => {
     uploadId: null,
     headshotImage: null,
     selfiepicture: null,
+    screenShotid: null,
 
   });
 
@@ -61,6 +62,7 @@ const Form = () => {
     if (!formData.uploadId) newErrors.uploadId = "Upload ID is required.";
     if (!formData.headshotImage) newErrors.headshotImage = "Headshot image is required.";
     if (!formData.selfiepicture) newErrors.selfiepicture = "Headshot image is required.";
+    if (!formData.screenShotid) newErrors.screenShotid = "Screen shot confrimation of rad ID Number from email is required.";
 
     return newErrors;
   };
@@ -101,11 +103,16 @@ const Form = () => {
       if (formData.uploadId) {
         selfiepicture = await uploadImage(formData.selfiepicture);
       }
+      let screenShotid = "";
+      if (formData.screenShotid) {
+        screenShotid = await uploadImage(formData.screenShotid);
+      }
       const emailData = {
         ...formData,
         headshotImage: headshotUrl,
         uploadId: uploadIdUrl,
         selfiepicture: selfiepicture,
+        screenShotid: screenShotid,
       };
 
       const SERVICE_ID = "service_n2ccxbe";
@@ -132,6 +139,7 @@ const Form = () => {
           uploadId: null,
           headshotImage: null,
           selfiepicture: null,
+          screenShotid: null,
         });
       } else {
         setErrorMessage("Form submission failed. Please try again.");
@@ -289,7 +297,7 @@ const Form = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.2, duration: 0.5 }}
           >
-            <label htmlFor="headshotImage" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="sekfipicture" className="block text-sm font-medium text-gray-700">
               Selfie Picture <span className="text-red-800">*</span>
             </label>
             <input
@@ -301,6 +309,24 @@ const Form = () => {
             />
             {errors.selfiepicture && <p className="text-red-500 text-sm mt-1">{errors.selfiepicture}</p>}
           </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.2, duration: 0.5 }}
+          >
+            <label htmlFor="screenshotid" className="block text-sm font-medium text-gray-700">
+              Screen shot of confirmation of rad ID No. from Email <span className="text-red-800">*</span>
+            </label>
+            <input
+              id="screenShotid"
+              name="screenShotid"
+              type="file"
+              onChange={handleChange}
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+            />
+            {errors.screenShotid && <p className="text-red-500 text-sm mt-1">{errors.screenShotid}</p>}
+          </motion.div>
+
 
           <motion.div
             initial={{ opacity: 0, y: -20 }}
